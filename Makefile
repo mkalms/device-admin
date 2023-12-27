@@ -5,6 +5,9 @@
 
 OPENAPI_GENERATOR_VERSION:=v6.2.1
 
+LOCAL_API_USER:="test"
+LOCAL_API_TOKEN:="1234"
+
 ########################################################
 # Default command, in case someone does juat 'make' w/o target
 ########################################################
@@ -27,6 +30,8 @@ run-local-psql:
 run-local-backend:
 	cd backend/cmd \
 	&&	PORT=8084 \
+		API_USER=${LOCAL_API_USER} \
+		API_TOKEN=${LOCAL_API_TOKEN} \
 		go run main.go
 
 #########################################################

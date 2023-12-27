@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 
+	authentication "github.com/stb-org/stb/backend/authentication"
 	openapi "github.com/stb-org/stb/backend/generated/go"
 )
 
@@ -43,22 +44,12 @@ func init() {
 
 	// Set up authentication
 
-	// clientID := os.Getenv(env_GCP_PROJECT_ID)
-	// if clientID == "" {
-	// 	panic(fmt.Sprintf("%v must be set", env_GCP_PROJECT_ID))
-	// }
+	usernamePasswordValidator := authentication.CreateUsernamePasswordValidator()
+	authenticationMiddleware := authentication.CreateAuthenticationMiddleware([]authentication.Validator{
+		usernamePasswordValidator,
+	})
 
-	// usernamePasswordValidator := authentication.CreateUsernamePasswordValidator()
-	// authTokenValidator, err := authentication.CreateAuthTokenValidator(clientID)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// authenticationMiddleware := authentication.CreateAuthenticationMiddleware([]authentication.Validator{
-	// 	usernamePasswordValidator,
-	// 	authTokenValidator,
-	// })
-
-	// router.Use(authenticationMiddleware.Handler)
+	router.Use(authenticationMiddleware.Handler)
 }
 
 func BackendAPI(w http.ResponseWriter, r *http.Request) {
