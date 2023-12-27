@@ -11,6 +11,7 @@ go/helpers.go
 go/impl.go
 go/logger.go
 go/model_get_device_config_response.go
+go/model_login_request.go
 go/model_message_response.go
 go/model_set_device_config_request.go
 go/routers.go

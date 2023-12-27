@@ -28,7 +28,7 @@ func (*UsernamePasswordValidator) Validate(r *http.Request) (string, int, string
 
 	// Validate that the API user + API token matches what is configured for this backend
 
-	success := isUserAndAPITokenValid(username, password)
+	success := IsUserAndAPITokenValid(username, password)
 
 	if !success {
 		log.Printf("API user/API token pair %v, %v is not valid", username, password)
@@ -42,7 +42,7 @@ func (*UsernamePasswordValidator) Validate(r *http.Request) (string, int, string
 	}
 }
 
-func isUserAndAPITokenValid(username string, password string) bool {
+func IsUserAndAPITokenValid(username string, password string) bool {
 
 	return username == getApiUser() && password == getApiToken()
 }

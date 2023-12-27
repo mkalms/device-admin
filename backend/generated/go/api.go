@@ -22,6 +22,7 @@ import (
 type DefaultApiRouter interface { 
 	GetDeviceConfig(http.ResponseWriter, *http.Request)
 	Health(http.ResponseWriter, *http.Request)
+	Login(http.ResponseWriter, *http.Request)
 	SetDeviceConfig(http.ResponseWriter, *http.Request)
 }
 
@@ -33,5 +34,6 @@ type DefaultApiRouter interface {
 type DefaultApiServicer interface { 
 	GetDeviceConfig(context.Context) (ImplResponse, error)
 	Health(context.Context) (ImplResponse, error)
+	Login(context.Context, LoginRequest) (ImplResponse, error)
 	SetDeviceConfig(context.Context, SetDeviceConfigRequest) (ImplResponse, error)
 }

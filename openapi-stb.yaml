@@ -9,6 +9,26 @@ info:
   version: 1.0.0
 
 paths:
+  /login:
+    post:
+      summary: Login
+      operationId: login
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/loginRequest"
+
+      responses:
+        200:
+          description: Success
+          content: {}
+
+        401:
+          $ref: "#/components/responses/401"
+
   /health:
     get:
       summary: Health check
@@ -87,6 +107,17 @@ components:
         message:
           type: string
           example: Invalid API invocation
+
+    loginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
 
     getDeviceConfigResponse:
       type: object

@@ -7,6 +7,11 @@ import (
 	rest_api "github.com/stb-org/stb/backend/rest-api"
 )
 
+func (s *ApiService) Login(ctx context.Context, loginRequest openapi.LoginRequest) (openapi.ImplResponse, error) {
+	response, err := rest_api.Login(ctx, loginRequest)
+	return response, err
+}
+
 func (s *ApiService) Health(ctx context.Context) (openapi.ImplResponse, error) {
 	response, err := rest_api.Health(ctx)
 	return response, err

@@ -63,6 +63,12 @@ func (c *DefaultApiController) Routes() Routes {
 			c.Health,
 		},
 		{
+			"Login",
+			strings.ToUpper("Post"),
+			"/login",
+			c.Login,
+		},
+		{
 			"SetDeviceConfig",
 			strings.ToUpper("Post"),
 			"/deviceConfig",
@@ -87,6 +93,30 @@ func (c *DefaultApiController) GetDeviceConfig(w http.ResponseWriter, r *http.Re
 // Health - Health check
 func (c *DefaultApiController) Health(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.Health(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+
+}
+
+// Login - Login
+func (c *DefaultApiController) Login(w http.ResponseWriter, r *http.Request) {
+	loginRequestParam := LoginRequest{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&loginRequestParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertLoginRequestRequired(loginRequestParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.Login(r.Context(), loginRequestParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

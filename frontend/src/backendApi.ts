@@ -6,6 +6,7 @@ import {
 } from "./generated/configuration";
 import { DefaultApiFactory } from "./generated/api";
 import { backendAPIEndpoint } from "./appConfig";
+import { useAuthUserStore } from "./stores/authUser";
 
 const axiosInstance = axios.create({
   baseURL: backendAPIEndpoint,
@@ -16,9 +17,13 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
 
-    // Add hardcoded auth header for test:1234
-    // TODO: replace this with actual tracking of logged-in identity
-    config.headers["Authorization"] = "Basic dGVzdDoxMjM0";
+    const authUserStore = useAuthUserStore();
+
+    if (authUserStore.credentials) {
+      const authString = `${authUserStore.credentials.username}:${authUserStore.credentials.password}`;
+      const authBase64 = btoa(String.fromCodePoint(...new TextEncoder().encode(authString)));
+      config.headers["Authorization"] = `Basic ${authBase64}`;
+    }
     return config;
   },
 );

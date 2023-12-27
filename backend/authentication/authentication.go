@@ -45,6 +45,12 @@ func (authenticationMiddleware *AuthenticationMiddleware) Handler(next http.Hand
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+		// Workaround for endpoints that do not require authentication
+		if isNonProtectedEndpoint(r.URL.Path) {
+			next.ServeHTTP(w, r)
+			return
+		}
+
 		userIdentity := ""
 
 		// Try validators, one by one, until there is a valid identity, an invalid identity, or we have tried all validators
@@ -83,4 +89,8 @@ func (authenticationMiddleware *AuthenticationMiddleware) Handler(next http.Hand
 
 		next.ServeHTTP(w, r.WithContext(ctxWithUserIdentity))
 	})
+}
+
+func isNonProtectedEndpoint(path string) bool {
+	return path == "/login" || path == "/health"
 }

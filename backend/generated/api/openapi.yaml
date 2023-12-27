@@ -9,6 +9,26 @@ info:
 servers:
 - url: /
 paths:
+  /login:
+    post:
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginRequest'
+        required: true
+      responses:
+        "200":
+          content: {}
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/messageResponse'
+          description: Not authorized
+      summary: Login
   /health:
     get:
       operationId: health
@@ -87,6 +107,16 @@ components:
           type: string
       required:
       - message
+      type: object
+    loginRequest:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+      - password
+      - username
       type: object
     getDeviceConfigResponse:
       example:
