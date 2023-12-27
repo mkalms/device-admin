@@ -56,7 +56,12 @@ generate-go-server-api:
 		--additional-properties=enumClassPrefix=true,hideGenerationTimestamp=true,generateAliasAsModel=false \
 		-o /local/backend/generated
 
+# Ensure the Golang server generated code is not in a separate module
 	rm backend/generated/go.mod
+
+#	The Golang server generator emits an import for "github.com/gorilla/mux" even when not necessary. Remove that manually.
+	sed -i 's:"github.com/gorilla/mux"::g' backend/generated/go/api_default.go
+
 
 generate-typescript-client-api:
 
