@@ -12,6 +12,12 @@
           :to="{ name: 'dashboard' }"
           link
         />
+        <v-list-item
+          prepend-icon="mdi-cog"
+          title="Device configuration"
+          :to="{ name: 'deviceConfig' }"
+          link
+        />
       </v-list>
     </v-navigation-drawer>
 
