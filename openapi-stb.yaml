@@ -1,0 +1,114 @@
+openapi: 3.0.1
+
+info:
+  title: STB config API
+  description: "This is the API that is used to configure an STB"
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+
+paths:
+  /deviceConfig:
+    get:
+      summary: Fetch device config
+      operationId: getDeviceConfig
+
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getDeviceConfigResponse"
+
+        401:
+          $ref: "#/components/responses/401"
+
+    post:
+      summary: Set device config
+      operationId: setDeviceConfig
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/setDeviceConfigRequest"
+
+      responses:
+        200:
+          description: Success
+          content: {}
+
+        400:
+          $ref: "#/components/responses/400"
+
+        401:
+          $ref: "#/components/responses/401"
+
+
+components:
+
+  responses:
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/messageResponse"
+
+    401:
+      description: Not authorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/messageResponse"
+
+  schemas:
+    messageResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: Invalid API invocation
+
+    getDeviceConfigResponse:
+      type: object
+      required:
+        - ipAddress
+        - netMask
+        - bitRate
+        - duplex
+      properties:
+        ipAddress:
+          type: string
+        netMask:
+          type: string
+        bitRate:
+          type: integer
+          format: int32
+        duplex:
+          type: string
+          enum: [half, full]
+
+    setDeviceConfigRequest:
+      type: object
+      required:
+        - ipAddress
+        - netMask
+        - bitRate
+        - duplex
+      properties:
+        ipAddress:
+          type: string
+        netMask:
+          type: string
+        bitRate:
+          type: integer
+          format: int32
+        duplex:
+          type: string
+          enum: [half, full]

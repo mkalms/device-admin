@@ -1,0 +1,121 @@
+openapi: 3.0.1
+info:
+  description: This is the API that is used to configure an STB
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: STB config API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /deviceConfig:
+    get:
+      operationId: getDeviceConfig
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDeviceConfigResponse'
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/messageResponse'
+          description: Not authorized
+      summary: Fetch device config
+    post:
+      operationId: setDeviceConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/setDeviceConfigRequest'
+        required: true
+      responses:
+        "200":
+          content: {}
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/messageResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/messageResponse'
+          description: Not authorized
+      summary: Set device config
+components:
+  responses:
+    "400":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/messageResponse'
+      description: Bad Request
+    "401":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/messageResponse'
+      description: Not authorized
+  schemas:
+    messageResponse:
+      properties:
+        message:
+          example: Invalid API invocation
+          type: string
+      required:
+      - message
+      type: object
+    getDeviceConfigResponse:
+      example:
+        bitRate: 0
+        netMask: netMask
+        ipAddress: ipAddress
+        duplex: half
+      properties:
+        ipAddress:
+          type: string
+        netMask:
+          type: string
+        bitRate:
+          format: int32
+          type: integer
+        duplex:
+          enum:
+          - half
+          - full
+          type: string
+      required:
+      - bitRate
+      - duplex
+      - ipAddress
+      - netMask
+      type: object
+    setDeviceConfigRequest:
+      properties:
+        ipAddress:
+          type: string
+        netMask:
+          type: string
+        bitRate:
+          format: int32
+          type: integer
+        duplex:
+          enum:
+          - half
+          - full
+          type: string
+      required:
+      - bitRate
+      - duplex
+      - ipAddress
+      - netMask
+      type: object
