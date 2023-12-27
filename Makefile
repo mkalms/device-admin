@@ -1,7 +1,7 @@
 .PHONY: default
 .PHONY: run-local-backend
 
-.PHONY: generate-apis generate-go-server-api generate-go-client-api generate-typescript-client-api
+.PHONY: generate-apis generate-go-server-api generate-typescript-client-api
 
 OPENAPI_GENERATOR_VERSION:=v6.2.1
 
@@ -21,12 +21,6 @@ default:
 # Local (emulator) commands
 #########################################################
 
-run-local-sql-auth-proxy:
-	./binaries/cloud_sql_proxy -instances "$(shell jq -r ".cloudSQLInstance" < $(ENV)/config.json)=tcp:5432" -fd_rlimit 1024 -enable_iam_login -credential_file=$(ENV)/database/google_application_credentials.json
-
-run-local-psql:
-	psql "host=127.0.0.1 sslmode=disable dbname=performance_backend user=$(shell jq -r ".psqlUser" < $(ENV)/config.json)"
-
 run-local-backend:
 	cd backend/cmd \
 	&&	PORT=8084 \
@@ -38,7 +32,7 @@ run-local-backend:
 # API regeneration commands
 #########################################################
 
-generate-apis: generate-go-server-api generate-go-client-api generate-typescript-client-api
+generate-apis: generate-go-server-api generate-typescript-client-api
 
 generate-go-server-api:
 
