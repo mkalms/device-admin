@@ -40,6 +40,20 @@ func (s *DefaultApiService) GetDeviceConfig(ctx context.Context) (ImplResponse, 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetDeviceConfig method not implemented")
 }
 
+// Health - Health check
+func (s *DefaultApiService) Health(ctx context.Context) (ImplResponse, error) {
+	// TODO - update Health with the required logic for this service method.
+	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	//TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
+	//return Response(200, nil),nil
+
+	//TODO: Uncomment the next line to return response Response(401, MessageResponse{}) or use other options such as http.Ok ...
+	//return Response(401, MessageResponse{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("Health method not implemented")
+}
+
 // SetDeviceConfig - Set device config
 func (s *DefaultApiService) SetDeviceConfig(ctx context.Context, setDeviceConfigRequest SetDeviceConfigRequest) (ImplResponse, error) {
 	// TODO - update SetDeviceConfig with the required logic for this service method.

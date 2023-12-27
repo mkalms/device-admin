@@ -151,6 +151,36 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Health check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        health: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/health`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Set device config
          * @param {SetDeviceConfigRequest} setDeviceConfigRequest 
          * @param {*} [options] Override http request option.
@@ -207,6 +237,16 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Health check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async health(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.health(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Set device config
          * @param {SetDeviceConfigRequest} setDeviceConfigRequest 
          * @param {*} [options] Override http request option.
@@ -237,6 +277,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary Health check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        health(options?: any): AxiosPromise<void> {
+            return localVarFp.health(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Set device config
          * @param {SetDeviceConfigRequest} setDeviceConfigRequest 
          * @param {*} [options] Override http request option.
@@ -264,6 +313,17 @@ export class DefaultApi extends BaseAPI {
      */
     public getDeviceConfig(options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).getDeviceConfig(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Health check
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public health(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).health(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

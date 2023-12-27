@@ -13,11 +13,13 @@ import (
 	"encoding/json"
 	"net/http"
 	"strings"
+
+	
 )
 
 // DefaultApiController binds http requests to an api service and writes the service results to the http response
 type DefaultApiController struct {
-	service      DefaultApiServicer
+	service DefaultApiServicer
 	errorHandler ErrorHandler
 }
 
@@ -47,12 +49,18 @@ func NewDefaultApiController(s DefaultApiServicer, opts ...DefaultApiOption) Rou
 
 // Routes returns all the api routes for the DefaultApiController
 func (c *DefaultApiController) Routes() Routes {
-	return Routes{
+	return Routes{ 
 		{
 			"GetDeviceConfig",
 			strings.ToUpper("Get"),
 			"/deviceConfig",
 			c.GetDeviceConfig,
+		},
+		{
+			"Health",
+			strings.ToUpper("Get"),
+			"/health",
+			c.Health,
 		},
 		{
 			"SetDeviceConfig",
@@ -66,6 +74,19 @@ func (c *DefaultApiController) Routes() Routes {
 // GetDeviceConfig - Fetch device config
 func (c *DefaultApiController) GetDeviceConfig(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.GetDeviceConfig(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+
+}
+
+// Health - Health check
+func (c *DefaultApiController) Health(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.Health(r.Context())
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

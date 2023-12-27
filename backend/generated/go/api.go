@@ -21,6 +21,7 @@ import (
 // pass the data to a DefaultApiServicer to perform the required actions, then write the service results to the http response.
 type DefaultApiRouter interface { 
 	GetDeviceConfig(http.ResponseWriter, *http.Request)
+	Health(http.ResponseWriter, *http.Request)
 	SetDeviceConfig(http.ResponseWriter, *http.Request)
 }
 
@@ -31,5 +32,6 @@ type DefaultApiRouter interface {
 // and updated with the logic required for the API.
 type DefaultApiServicer interface { 
 	GetDeviceConfig(context.Context) (ImplResponse, error)
+	Health(context.Context) (ImplResponse, error)
 	SetDeviceConfig(context.Context, SetDeviceConfigRequest) (ImplResponse, error)
 }

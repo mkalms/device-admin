@@ -7,7 +7,10 @@ import (
 	rest_api "github.com/stb-org/stb/backend/rest-api"
 )
 
-// store API
+func (s *ApiService) Health(ctx context.Context) (openapi.ImplResponse, error) {
+	response, err := rest_api.Health(ctx)
+	return response, err
+}
 
 func (s *ApiService) GetDeviceConfig(ctx context.Context) (openapi.ImplResponse, error) {
 	response, err := rest_api.GetDeviceConfig(ctx)

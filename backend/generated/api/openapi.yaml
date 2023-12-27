@@ -9,6 +9,20 @@ info:
 servers:
 - url: /
 paths:
+  /health:
+    get:
+      operationId: health
+      responses:
+        "200":
+          content: {}
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/messageResponse'
+          description: Not authorized
+      summary: Health check
   /deviceConfig:
     get:
       operationId: getDeviceConfig
