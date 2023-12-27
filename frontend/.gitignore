@@ -1,0 +1,27 @@
+# Ignore firebase temp files
+/.firebase
+
+# Ignore all log files
+/*-debug.log
+
+# Logs
+/logs
+/*.log
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+/pnpm-debug.log*
+/lerna-debug.log*
+
+# Node modules
+/node_modules
+
+# Unknown files
+*.local
+
+# Build output
+/dist
+/dist-ssr
+
+# Vite's temp folder
+/.vite

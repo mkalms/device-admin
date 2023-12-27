@@ -28,6 +28,12 @@ run-local-backend:
 		API_TOKEN=${LOCAL_API_TOKEN} \
 		go run main.go
 
+run-local-frontend:
+	cd frontend \
+	&&  npm install \
+	&&	VITE_BACKEND_API_ENDPOINT="http://localhost:8084" \
+		npm run dev
+
 #########################################################
 # API regeneration commands
 #########################################################
