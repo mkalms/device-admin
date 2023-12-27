@@ -10,6 +10,7 @@
 package openapi
 
 type SetDeviceConfigRequest struct {
+
 	IpAddress string `json:"ipAddress"`
 
 	NetMask string `json:"netMask"`
@@ -23,9 +24,9 @@ type SetDeviceConfigRequest struct {
 func AssertSetDeviceConfigRequestRequired(obj SetDeviceConfigRequest) error {
 	elements := map[string]interface{}{
 		"ipAddress": obj.IpAddress,
-		"netMask":   obj.NetMask,
-		"bitRate":   obj.BitRate,
-		"duplex":    obj.Duplex,
+		"netMask": obj.NetMask,
+		"bitRate": obj.BitRate,
+		"duplex": obj.Duplex,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {
