@@ -2,6 +2,8 @@
 .PHONY: run-local-backend
 .PHONY: run-local-frontend
 
+.PHONY: build-backend build-backend-executable build-backend-image
+
 .PHONY: generate-apis generate-go-server-api generate-typescript-client-api
 
 OPENAPI_GENERATOR_VERSION:=v6.2.1
@@ -34,6 +36,23 @@ run-local-frontend:
 	&&  npm install \
 	&&	VITE_BACKEND_API_ENDPOINT="http://localhost:8084" \
 		npm run dev
+
+#########################################################
+# Image build commands
+#########################################################
+
+build-backend: build-backend-executable build-backend-image
+
+build-backend-executable:
+	cd backend \
+	&&	GOOS=linux \
+		GOARCH=amd64 \
+		CGO_ENABLED=1 \
+		CC=musl-gcc \
+		go build --ldflags '-linkmode=external -extldflags=-static' -o build/app cmd/main.go
+
+build-backend-image:
+	docker build backend -t backend:latest
 
 #########################################################
 # API regeneration commands
