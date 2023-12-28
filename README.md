@@ -36,3 +36,5 @@ These components are packaged up as Docker containers, and are ready to be deplo
 * The username/password for local use can be found in the [Makefile](Makefile)
 * The username/password for deployment can be found in [compose.yaml](deployment/compose.yaml)
 * After modifying [the OpenAPI specification](openapi-stb.yaml), regenerate glue code via `make generate-apis`
+
+* The current version uses 10MB RAM for the web container, and 5MB RAM for the backend API
