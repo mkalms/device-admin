@@ -1,5 +1,6 @@
 .PHONY: default
 .PHONY: run-local-backend
+.PHONY: run-local-frontend
 
 .PHONY: generate-apis generate-go-server-api generate-typescript-client-api
 
