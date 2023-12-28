@@ -8,7 +8,7 @@
   ></v-text-field>
   <v-text-field
     label="Netmask"
-    v-bind:model-value="clonedDeviceConfigState.netMask"
+    :model-value="clonedDeviceConfigState.netMask"
     @update:model-value="
       (newValue) => (clonedDeviceConfigState.netMask = newValue)
     "
@@ -16,7 +16,7 @@
   <v-text-field
     label="Bit rate"
     type="number"
-    v-bind:model-value="clonedDeviceConfigState.bitRate"
+    :model-value="clonedDeviceConfigState.bitRate"
     @update:model-value="
       (newValue) =>
         (clonedDeviceConfigState.bitRate = newValue as unknown as number)

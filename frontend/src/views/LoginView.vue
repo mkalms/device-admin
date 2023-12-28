@@ -31,7 +31,7 @@
             <v-spacer></v-spacer>
             <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
               <v-btn
-                x-large
+                size="x-large"
                 block
                 :disabled="!valid"
                 :loading="loading"

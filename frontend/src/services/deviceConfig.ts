@@ -12,7 +12,7 @@ export interface DeviceConfigState {
 }
 
 export async function getDeviceConfig(): Promise<DeviceConfigState> {
-  let getDeviceConfigResponse = await api.getDeviceConfig();
+  const getDeviceConfigResponse = await api.getDeviceConfig();
   const deviceConfigState = {
     ipAddress: getDeviceConfigResponse.data.ipAddress,
     netMask: getDeviceConfigResponse.data.netMask,

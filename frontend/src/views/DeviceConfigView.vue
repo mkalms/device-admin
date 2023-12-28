@@ -2,7 +2,7 @@
   <h2>Device Configuration</h2>
   <template v-if="deviceConfigState !== undefined">
     <DeviceConfig
-      :deviceConfigState="deviceConfigState"
+      :device-config-state="deviceConfigState"
       @update="(newConfig) => update(newConfig)"
     />
   </template>
