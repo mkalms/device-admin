@@ -54,6 +54,10 @@ build-backend-executable:
 build-backend-image:
 	docker build backend -t backend:latest
 
+build-frontend-site:
+	cd frontend \
+	&&	npm run build
+
 #########################################################
 # API regeneration commands
 #########################################################
