@@ -62,6 +62,7 @@ const show1 = ref(false);
 
 const loading = ref(false);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function required(value: any): boolean | string {
   return !!value || "Field is required";
 }
