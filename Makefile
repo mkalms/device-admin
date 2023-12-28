@@ -2,8 +2,8 @@
 .PHONY: run-local-backend
 .PHONY: run-local-frontend
 
+.PHONY: build
 .PHONY: build-backend build-backend-executable build-backend-image
-
 .PHONY: build-frontend-site
 
 .PHONY: run-containers
@@ -44,6 +44,8 @@ run-local-frontend:
 #########################################################
 # Image/site build commands
 #########################################################
+
+build: build-backend build-frontend-site
 
 build-backend: build-backend-executable build-backend-image
 
