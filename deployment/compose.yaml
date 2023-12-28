@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+
+  web:
+    image: "nginx:1.25.3-bookworm"
+    ports:
+      - "80:80"
+    networks:
+      - default
+      - internal-services
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./web/static:/usr/share/nginx/html:ro
+
+  backend:
+    image: "backend:latest"
+    ports:
+      - 8080:8080
+    networks:
+      - internal-services
+    environment:
+      API_USER: realuser
+      API_TOKEN: 54321
+
+networks:
+  default:
+
+  internal-services:
+    driver: bridge

@@ -4,6 +4,10 @@
 
 .PHONY: build-backend build-backend-executable build-backend-image
 
+.PHONY: build-frontend-site
+
+.PHONY: run-containers
+
 .PHONY: generate-apis generate-go-server-api generate-typescript-client-api
 
 OPENAPI_GENERATOR_VERSION:=v6.2.1
@@ -38,7 +42,7 @@ run-local-frontend:
 		npm run dev
 
 #########################################################
-# Image build commands
+# Image/site build commands
 #########################################################
 
 build-backend: build-backend-executable build-backend-image
@@ -56,7 +60,19 @@ build-backend-image:
 
 build-frontend-site:
 	cd frontend \
-	&&	npm run build
+	&&	VITE_BACKEND_API_ENDPOINT="/api" \
+		npm run build
+
+	rm -r deployment/web/static
+	cp -r frontend/dist deployment/web/static
+
+#########################################################
+# Deployment commands
+#########################################################
+
+run-deployment:
+	cd deployment \
+	&&	docker compose up
 
 #########################################################
 # API regeneration commands
