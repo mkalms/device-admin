@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   web:
-    image: "nginx:1.25.3-bookworm"
+    image: "nginx:1.25.3-alpine-slim"
     ports:
       - "80:80"
     networks:
