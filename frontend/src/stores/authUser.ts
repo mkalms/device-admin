@@ -7,12 +7,12 @@ export enum LoginState {
 }
 
 export interface Credentials {
-  username: string,
-  password: string,
+  username: string;
+  password: string;
 }
 
 interface State {
-  credentials: Credentials|null;
+  credentials: Credentials | null;
   loginState: LoginState;
 }
 

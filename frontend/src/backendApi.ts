@@ -16,12 +16,13 @@ const axiosInstance = axios.create({
 // Use interceptor to inject the token to requests
 axiosInstance.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
-
     const authUserStore = useAuthUserStore();
 
     if (authUserStore.credentials) {
       const authString = `${authUserStore.credentials.username}:${authUserStore.credentials.password}`;
-      const authBase64 = btoa(String.fromCodePoint(...new TextEncoder().encode(authString)));
+      const authBase64 = btoa(
+        String.fromCodePoint(...new TextEncoder().encode(authString)),
+      );
       config.headers["Authorization"] = `Basic ${authBase64}`;
     }
     return config;

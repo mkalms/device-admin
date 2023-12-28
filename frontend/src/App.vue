@@ -53,7 +53,7 @@
     <template v-else>
       <v-container class="fill-height" fluid>
         <v-row justify="center">
-          <LoginView/>
+          <LoginView />
         </v-row>
       </v-container>
     </template>
@@ -61,7 +61,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { useAuthUserStore, LoginState } from "./stores/authUser";
 
 import LoginView from "./views/LoginView.vue";

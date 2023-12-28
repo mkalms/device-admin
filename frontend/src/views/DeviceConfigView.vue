@@ -1,23 +1,27 @@
 <template>
   <h2>Device Configuration</h2>
   <template v-if="deviceConfigState !== undefined">
-    <DeviceConfig :deviceConfigState="deviceConfigState" @update="newConfig => update(newConfig)"/>
+    <DeviceConfig
+      :deviceConfigState="deviceConfigState"
+      @update="(newConfig) => update(newConfig)"
+    />
   </template>
   <template v-else>
     <!-- Display progress bar until the device configuration has been loaded -->
-    <v-progress-circular
-      indeterminate
-      color="primary"
-    ></v-progress-circular>
+    <v-progress-circular indeterminate color="primary"></v-progress-circular>
   </template>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { DeviceConfigState, getDeviceConfig, setDeviceConfig } from '../services/deviceConfig';
-import DeviceConfig from '../components/DeviceConfig.vue';
+import { ref } from "vue";
+import {
+  DeviceConfigState,
+  getDeviceConfig,
+  setDeviceConfig,
+} from "../services/deviceConfig";
+import DeviceConfig from "../components/DeviceConfig.vue";
 
-const deviceConfigState = ref(undefined as DeviceConfigState|undefined);
+const deviceConfigState = ref(undefined as DeviceConfigState | undefined);
 
 async function update(newConfig: DeviceConfigState) {
   try {
@@ -37,5 +41,4 @@ async function initialize() {
 }
 
 initialize();
-
 </script>

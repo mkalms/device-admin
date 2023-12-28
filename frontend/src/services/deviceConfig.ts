@@ -1,12 +1,15 @@
-import { GetDeviceConfigResponseDuplexEnum, SetDeviceConfigRequest } from "../generated/api";
-import { api } from '../backendApi';
+import {
+  GetDeviceConfigResponseDuplexEnum,
+  SetDeviceConfigRequest,
+} from "../generated/api";
+import { api } from "../backendApi";
 
 export interface DeviceConfigState {
-  ipAddress: string,
-  netMask: string,
-  bitRate: number,
-  duplex: GetDeviceConfigResponseDuplexEnum,
-};
+  ipAddress: string;
+  netMask: string;
+  bitRate: number;
+  duplex: GetDeviceConfigResponseDuplexEnum;
+}
 
 export async function getDeviceConfig(): Promise<DeviceConfigState> {
   let getDeviceConfigResponse = await api.getDeviceConfig();
@@ -17,7 +20,7 @@ export async function getDeviceConfig(): Promise<DeviceConfigState> {
     duplex: getDeviceConfigResponse.data.duplex,
   } as DeviceConfigState;
 
-  return deviceConfigState; 
+  return deviceConfigState;
 }
 
 export async function setDeviceConfig(newConfig: DeviceConfigState) {

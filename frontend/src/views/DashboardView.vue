@@ -1,23 +1,22 @@
 <template>
   <h2>Dashboard</h2>
-  <BackendStatus :status="backendStatus"/>
+  <BackendStatus :status="backendStatus" />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
-import { api } from '../backendApi';
-import { HttpStatusCode } from 'axios';
+import { ref, onMounted, onUnmounted } from "vue";
+import { api } from "../backendApi";
+import { HttpStatusCode } from "axios";
 
-import BackendStatus from '../components/BackendStatus.vue';
+import BackendStatus from "../components/BackendStatus.vue";
 
-const backendStatus = ref(undefined as boolean|undefined);
+const backendStatus = ref(undefined as boolean | undefined);
 
-const BACKEND_STATUS_REFRESH_INTERVAL = 1*1000;
+const BACKEND_STATUS_REFRESH_INTERVAL = 1 * 1000;
 
-let backendStatusPollId: ReturnType<typeof setInterval>|undefined = undefined;
+let backendStatusPollId: ReturnType<typeof setInterval> | undefined = undefined;
 
 onMounted(() => {
-
   backendStatusPollId = setInterval(async () => {
     try {
       const result = await api.health();
