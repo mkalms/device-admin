@@ -24,6 +24,7 @@ import DeviceConfig from "../components/DeviceConfig.vue";
 const deviceConfigState = ref(undefined as DeviceConfigState | undefined);
 
 async function update(newConfig: DeviceConfigState) {
+  deviceConfigState.value = newConfig;
   try {
     await setDeviceConfig(newConfig);
   } catch (error) {

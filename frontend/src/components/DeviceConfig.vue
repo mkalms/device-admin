@@ -30,12 +30,7 @@
       (newValue) => (clonedDeviceConfigState.duplex = newValue)
     "
   ></v-select>
-  <v-btn
-    color="primary"
-    @click="
-      update();
-      $emit('update', clonedDeviceConfigState);
-    "
+  <v-btn color="primary" @click="$emit('update', clonedDeviceConfigState)"
     >Update</v-btn
   >
   <v-btn @click="cancel()">Cancel</v-btn>
@@ -62,7 +57,7 @@ const props = defineProps<{
   deviceConfigState: DeviceConfigState;
 }>();
 
-const emit = defineEmits<{
+defineEmits<{
   (e: "update", value: DeviceConfigState): void;
 }>();
 
@@ -72,17 +67,6 @@ function copyReferenceToClone() {
   clonedDeviceConfigState.value = structuredClone(
     toRaw(props.deviceConfigState),
   );
-}
-
-function copyCloneToReference() {
-  props.deviceConfigState.ipAddress = clonedDeviceConfigState.value!.ipAddress;
-  props.deviceConfigState.netMask = clonedDeviceConfigState.value!.netMask;
-  props.deviceConfigState.bitRate = clonedDeviceConfigState.value!.bitRate;
-  props.deviceConfigState.duplex = clonedDeviceConfigState.value!.duplex;
-}
-
-function update() {
-  copyCloneToReference();
 }
 
 function cancel() {
