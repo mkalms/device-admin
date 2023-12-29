@@ -19,7 +19,7 @@ These components are packaged up as Docker containers, and are ready to be deplo
 
 ## Develop & test locally
 
-* Run backend locally: `make run-local backend` -- can be reached at http://localhost:8084/
+* Run backend locally: `make run-local-backend` -- can be reached at http://localhost:8084/
 
 * Run frontend locally: `make run-local-frontend` -- http://localhost:5173/
 
