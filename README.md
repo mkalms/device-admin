@@ -40,9 +40,11 @@ These components are packaged up as Docker containers, and are ready to be deplo
 
 ## First time installation with WSL2 and Ubuntu 22.04
 
-```sudo apt-get update && sudo apt install make golang-go musl-tools docker.io
+```
+sudo apt-get update && sudo apt install make golang-go musl-tools docker.io
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 mkdir -p ~/.docker/cli-plugins/
 curl -SL https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 chmod +x ~/.docker/cli-plugins/docker-compose
-sudo usermod -aG docker ${USER}```
+sudo usermod -aG docker ${USER}
+```
