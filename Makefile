@@ -36,7 +36,7 @@ run-local-backend:
 		go run main.go
 
 run-local-frontend:
-	cd frontend \
+	cd web-ui \
 	&&  npm install \
 	&&	VITE_BACKEND_API_ENDPOINT="http://localhost:8084" \
 		npm run dev
@@ -61,12 +61,12 @@ build-backend-image:
 	docker build device-api -t device-api:latest
 
 build-frontend-site:
-	cd frontend \
+	cd web-ui \
 	&&	VITE_BACKEND_API_ENDPOINT="/api" \
 		npm run build
 
 	rm -r deployment/web/static
-	cp -r frontend/dist deployment/web/static
+	cp -r web-ui/dist deployment/web/static
 
 #########################################################
 # Deployment commands
@@ -107,7 +107,7 @@ generate-go-server-api:
 
 generate-typescript-client-api:
 
-#	rm -rf frontend/src/generated/
+#	rm -rf web-ui/src/generated/
 	docker run \
 		--rm \
 		-v "${PWD}:/local" \
@@ -117,7 +117,7 @@ generate-typescript-client-api:
 		-i /local/openapi/openapi.yaml \
 		-g typescript-axios \
 		--additional-properties=generateAliasAsModel=false \
-		-o /local/frontend/src/generated
+		-o /local/web-ui/src/generated
 	
 #	The TypeScript client generator emits the type 'Bool' for booleans. Change that to 'boolean' to make it valid TS code
-	sed -i 's/Bool/boolean/g' frontend/src/generated/api.ts
+	sed -i 's/Bool/boolean/g' web-ui/src/generated/api.ts

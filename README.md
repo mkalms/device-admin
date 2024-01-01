@@ -15,7 +15,7 @@ These components are packaged up as Docker containers, and are ready to be deplo
 * Install Golang 1.18+
 * Install [nvm](https://github.com/nvm-sh/nvm)
 
-* Activate the appropriate Node version by doing `nvm use $(cat frontend/.nvmrc)` in each terminal window
+* Activate the appropriate Node version by doing `nvm use $(cat web-ui/.nvmrc)` in each terminal window
 
 ## Develop & test locally
 
