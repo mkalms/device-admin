@@ -93,7 +93,7 @@ generate-go-server-api:
 		generate \
 		--git-user-id=stb-org \
 		--git-repo-id=stb/backend/generated \
-		-i /local/openapi-stb.yaml \
+		-i /local/openapi/openapi.yaml \
 		-g go-server \
 		--additional-properties=enumClassPrefix=true,hideGenerationTimestamp=true,generateAliasAsModel=false \
 		-o /local/backend/generated
@@ -114,7 +114,7 @@ generate-typescript-client-api:
 		--user $(shell id -u):$(shell id -g) \
 		openapitools/openapi-generator-cli:${OPENAPI_GENERATOR_VERSION} \
 		generate \
-		-i /local/openapi-stb.yaml \
+		-i /local/openapi/openapi.yaml \
 		-g typescript-axios \
 		--additional-properties=generateAliasAsModel=false \
 		-o /local/frontend/src/generated
