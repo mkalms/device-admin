@@ -3,15 +3,12 @@
 .PHONY: run-local-frontend
 
 .PHONY: build
-.PHONY: build-backend build-backend-executable build-backend-image
+.PHONY: build-backend
 .PHONY: build-frontend-site
 
 .PHONY: run-containers
 
 .PHONY: generate-apis
-
-LOCAL_API_USER:="test"
-LOCAL_API_TOKEN:="1234"
 
 ########################################################
 # Default command, in case someone does juat 'make' w/o target
@@ -27,11 +24,7 @@ default:
 #########################################################
 
 run-local-backend:
-	cd device-api/cmd \
-	&&	PORT=8084 \
-		API_USER=${LOCAL_API_USER} \
-		API_TOKEN=${LOCAL_API_TOKEN} \
-		go run main.go
+	$(MAKE) -C device-api run-local-backend
 
 run-local-frontend:
 	cd web-ui \
@@ -45,18 +38,8 @@ run-local-frontend:
 
 build: build-backend build-frontend-site
 
-build-backend: build-backend-executable build-backend-image
-
-build-backend-executable:
-	cd device-api \
-	&&	GOOS=linux \
-		GOARCH=amd64 \
-		CGO_ENABLED=1 \
-		CC=musl-gcc \
-		go build --ldflags '-linkmode=external -extldflags=-static' -o build/app cmd/main.go
-
-build-backend-image:
-	docker build device-api -t device-api:latest
+build-backend:
+	$(MAKE) -C device-api
 
 build-frontend-site:
 	cd web-ui \
