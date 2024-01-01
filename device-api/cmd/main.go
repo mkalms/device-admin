@@ -6,12 +6,12 @@ import (
 	"os"
 
 	"github.com/GoogleCloudPlatform/functions-framework-go/funcframework"
-	backend "github.com/stb-org/stb/backend"
+	deviceapi "github.com/stb-org/stb/device-api"
 )
 
 func main() {
 	ctx := context.Background()
-	if err := funcframework.RegisterHTTPFunctionContext(ctx, "/", backend.BackendAPI); err != nil {
+	if err := funcframework.RegisterHTTPFunctionContext(ctx, "/", deviceapi.BackendAPI); err != nil {
 		log.Fatalf("funcframework.RegisterHTTPFunctionContext: %v\n", err)
 	}
 

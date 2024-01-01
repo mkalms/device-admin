@@ -1,4 +1,4 @@
-module github.com/stb-org/stb/backend
+module github.com/stb-org/stb/device-api
 
 go 1.18
 

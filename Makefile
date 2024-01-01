@@ -29,7 +29,7 @@ default:
 #########################################################
 
 run-local-backend:
-	cd backend/cmd \
+	cd device-api/cmd \
 	&&	PORT=8084 \
 		API_USER=${LOCAL_API_USER} \
 		API_TOKEN=${LOCAL_API_TOKEN} \
@@ -50,7 +50,7 @@ build: build-backend build-frontend-site
 build-backend: build-backend-executable build-backend-image
 
 build-backend-executable:
-	cd backend \
+	cd device-api \
 	&&	GOOS=linux \
 		GOARCH=amd64 \
 		CGO_ENABLED=1 \
@@ -58,7 +58,7 @@ build-backend-executable:
 		go build --ldflags '-linkmode=external -extldflags=-static' -o build/app cmd/main.go
 
 build-backend-image:
-	docker build backend -t backend:latest
+	docker build device-api -t device-api:latest
 
 build-frontend-site:
 	cd frontend \
@@ -84,7 +84,7 @@ generate-apis: generate-go-server-api generate-typescript-client-api
 
 generate-go-server-api:
 
-	rm -rf backend/generated
+	rm -rf device-api/generated
 	docker run \
 		--rm \
 		-v "${PWD}:/local" \
@@ -92,17 +92,17 @@ generate-go-server-api:
 		openapitools/openapi-generator-cli:${OPENAPI_GENERATOR_VERSION} \
 		generate \
 		--git-user-id=stb-org \
-		--git-repo-id=stb/backend/generated \
+		--git-repo-id=stb/device-api/generated \
 		-i /local/openapi/openapi.yaml \
 		-g go-server \
 		--additional-properties=enumClassPrefix=true,hideGenerationTimestamp=true,generateAliasAsModel=false \
-		-o /local/backend/generated
+		-o /local/device-api/generated
 
 # Ensure the Golang server generated code is not in a separate module
-	rm backend/generated/go.mod
+	rm device-api/generated/go.mod
 
 #	The Golang server generator emits an import for "github.com/gorilla/mux" even when not necessary. Remove that manually.
-	sed -i 's:"github.com/gorilla/mux"::g' backend/generated/go/api_default.go
+	sed -i 's:"github.com/gorilla/mux"::g' device-api/generated/go/api_default.go
 
 
 generate-typescript-client-api:

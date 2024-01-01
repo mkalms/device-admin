@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	openapi "github.com/stb-org/stb/backend/generated/go"
+	openapi "github.com/stb-org/stb/device-api/generated/go"
 )
 
 func Reset(ctx context.Context) (openapi.ImplResponse, error) {

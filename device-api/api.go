@@ -1,10 +1,10 @@
-package backend
+package deviceapi
 
 import (
 	"context"
 
-	openapi "github.com/stb-org/stb/backend/generated/go"
-	rest_api "github.com/stb-org/stb/backend/rest-api"
+	openapi "github.com/stb-org/stb/device-api/generated/go"
+	rest_api "github.com/stb-org/stb/device-api/rest-api"
 )
 
 func (s *ApiService) Login(ctx context.Context, loginRequest openapi.LoginRequest) (openapi.ImplResponse, error) {

@@ -1,4 +1,4 @@
-package backend
+package deviceapi
 
 import (
 	"log"
@@ -7,8 +7,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 
-	authentication "github.com/stb-org/stb/backend/authentication"
-	openapi "github.com/stb-org/stb/backend/generated/go"
+	authentication "github.com/stb-org/stb/device-api/authentication"
+	openapi "github.com/stb-org/stb/device-api/generated/go"
 )
 
 type ApiService struct {
