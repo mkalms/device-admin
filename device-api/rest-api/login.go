@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	authentication "github.com/stb-org/stb/device-api/authentication"
-	openapi "github.com/stb-org/stb/device-api/generated/go"
+	authentication "github.com/device-admin-org/device-admin/device-api/authentication"
+	openapi "github.com/device-admin-org/device-admin/device-api/generated/go"
 )
 
 func Login(ctx context.Context, loginRequest openapi.LoginRequest) (openapi.ImplResponse, error) {

@@ -7,8 +7,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 
-	authentication "github.com/stb-org/stb/device-api/authentication"
-	openapi "github.com/stb-org/stb/device-api/generated/go"
+	authentication "github.com/device-admin-org/device-admin/device-api/authentication"
+	openapi "github.com/device-admin-org/device-admin/device-api/generated/go"
 )
 
 type ApiService struct {

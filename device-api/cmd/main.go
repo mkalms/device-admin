@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/GoogleCloudPlatform/functions-framework-go/funcframework"
-	deviceapi "github.com/stb-org/stb/device-api"
+	deviceapi "github.com/device-admin-org/device-admin/device-api"
 )
 
 func main() {

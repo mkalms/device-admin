@@ -1,4 +1,4 @@
-module github.com/stb-org/stb/device-api
+module github.com/device-admin-org/device-admin/device-api
 
 go 1.18
 
