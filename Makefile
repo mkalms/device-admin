@@ -6,7 +6,7 @@
 .PHONY: build-backend
 .PHONY: build-frontend-site
 
-.PHONY: run-containers
+.PHONY: run-deployment
 
 .PHONY: generate-apis
 
@@ -46,8 +46,7 @@ build-frontend-site:
 #########################################################
 
 run-deployment:
-	cd deployment \
-	&&	docker compose up
+	$(MAKE) -C deployment
 
 #########################################################
 # API regeneration commands
