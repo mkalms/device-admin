@@ -27,10 +27,7 @@ run-local-backend:
 	$(MAKE) -C device-api run-local-backend
 
 run-local-frontend:
-	cd web-ui \
-	&&  npm install \
-	&&	VITE_BACKEND_API_ENDPOINT="http://localhost:8084" \
-		npm run dev
+	$(MAKE) -C web-ui run-local-frontend
 
 #########################################################
 # Image/site build commands
@@ -42,12 +39,7 @@ build-backend:
 	$(MAKE) -C device-api
 
 build-frontend-site:
-	cd web-ui \
-	&&	VITE_BACKEND_API_ENDPOINT="/api" \
-		npm run build
-
-	rm -r deployment/web/static
-	cp -r web-ui/dist deployment/web/static
+	$(MAKE) -C web-ui
 
 #########################################################
 # Deployment commands
