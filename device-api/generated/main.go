@@ -13,7 +13,7 @@ import (
 	"log"
 	"net/http"
 
-	openapi "github.com/stb-org/stb/device-api/generated/go"
+	openapi "github.com/device-admin-org/device-admin/device-api/generated/go"
 )
 
 func main() {
