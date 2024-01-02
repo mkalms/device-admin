@@ -1,6 +1,6 @@
-# STB Config service example
+# Device admin service example
 
-This is a demonstration of how to create a configuration service for a device, such a a set-top box. It consists of two parts:
+This is a demonstration of how to create an admin service for a device, such as a set-top box. It consists of two parts:
 
 * There is a web frontend. This is a single-page application, built using 
 [Vue 3](https://vuejs.org/).
@@ -33,8 +33,8 @@ These components are packaged up as Docker containers, and are ready to be deplo
 
 ## Notes
 
-* The username/password for local use can be found in the [Makefile](Makefile)
-* The username/password for deployment can be found in [compose.yaml](deployment/compose.yaml)
+* The username/password for local use can be found in the [device-api/Makefile](device-api/Makefile)
+* The username/password for deployment can be found in [deployment/compose.yaml](deployment/compose.yaml)
 * After modifying [the OpenAPI specification](openapi/openapi.yaml), regenerate glue code via `make generate-apis`
 * The current version uses 10MB RAM for the web container, and 5MB RAM for the backend API
 
