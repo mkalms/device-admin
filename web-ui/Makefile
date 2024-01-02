@@ -1,16 +1,18 @@
-.PHONY: run-local-frontend build-frontend-site
+.PHONY: all run-local build clean
 
-.DEFAULT: build-frontend-site
+all: build
 
 DEPLOYMENT_DIR:=../deployment/web/static
 
-run-local-frontend:
+run-local:
 	npm install \
 	&&	VITE_BACKEND_API_ENDPOINT="http://localhost:8084" \
 		npm run dev
 
-build-frontend-site:
+build: clean
 	VITE_BACKEND_API_ENDPOINT="/api" \
 	npm run build
-	rm -r ${DEPLOYMENT_DIR}
 	cp -r dist ${DEPLOYMENT_DIR}
+
+clean:
+	rm -rf ${DEPLOYMENT_DIR}

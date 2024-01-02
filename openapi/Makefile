@@ -1,14 +1,14 @@
-.PHONY: generate-apis generate-go-server-api generate-typescript-client-api
-.PHONY: clean clean-server-api clean-client-api
+.PHONY: all generate-server generate-client
+.PHONY: clean clean-server clean-client
 
 OPENAPI_GENERATOR_VERSION:=v6.2.1
 BASE_DIR:=$(abspath ${CURDIR}/..)
 SERVER_API_DIR:=device-api/generated
 CLIENT_API_DIR:=web-ui/src/generated
 
-generate-apis: generate-go-server-api generate-typescript-client-api
+all: generate-server generate-client
 
-generate-go-server-api: clean-server-api
+generate-server: clean-server
 	docker run \
 		--rm \
 		-v "${BASE_DIR}:/local" \
@@ -27,7 +27,7 @@ generate-go-server-api: clean-server-api
 # when not necessary. Remove that manually.
 	sed -i 's:"github.com/gorilla/mux"::g' ${BASE_DIR}/${SERVER_API_DIR}/go/api_default.go
 
-generate-typescript-client-api:
+generate-client: clean-client
 	docker run \
 		--rm \
 		-v "${BASE_DIR}:/local" \
@@ -42,10 +42,10 @@ generate-typescript-client-api:
 # that to 'boolean' to make it valid TypeScript code.
 	sed -i 's/Bool/boolean/g' ${BASE_DIR}/${CLIENT_API_DIR}/api.ts
 
-clean: clean-server-api clean-client-api
+clean: clean-server clean-client
 
-clean-server-api:
+clean-server:
 	rm -rf ${BASE_DIR}/${SERVER_API_DIR}
 
-clean-client-api:
+clean-client:
 	rm -rf ${BASE_DIR}/${CLIENT_API_DIR}

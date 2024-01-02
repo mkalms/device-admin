@@ -1,4 +1,4 @@
-.PHONY: run-deployment
+.PHONY: run
 
-run-deployment:
+run:
 	docker compose up

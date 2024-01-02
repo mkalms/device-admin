@@ -4,7 +4,7 @@
 
     <template v-if="isLoggedIn()">
       <v-app-bar color="primary">
-        <v-app-bar-title>STB admin panel</v-app-bar-title>
+        <v-app-bar-title>Device admin panel</v-app-bar-title>
 
         <v-spacer></v-spacer>
 

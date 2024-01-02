@@ -1,8 +1,8 @@
 openapi: 3.0.1
 
 info:
-  title: STB config API
-  description: "This is the API that is used to configure an STB"
+  title: Device admin API
+  description: "This is the API that is used to manage a device"
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT

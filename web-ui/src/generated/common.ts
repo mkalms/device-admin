@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * STB config API
- * This is the API that is used to configure an STB
+ * Device admin API
+ * This is the API that is used to manage a device
  *
  * The version of the OpenAPI document: 1.0.0
  * 

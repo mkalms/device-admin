@@ -1,56 +1,30 @@
-.PHONY: default
-.PHONY: run-local-backend
-.PHONY: run-local-frontend
-
-.PHONY: build
-.PHONY: build-backend
-.PHONY: build-frontend-site
-
-.PHONY: run-deployment
-
+.PHONY: all
 .PHONY: generate-apis
+.PHONY: run-local-backend run-local-frontend
+.PHONY: build-backend build-frontend
+.PHONY: run-deployment
+.PHONY: clean
 
-########################################################
-# Default command, in case someone does juat 'make' w/o target
-########################################################
+all: clean generate-apis build-backend build-frontend run-deployment
 
-default:
-	@echo "See README.md for instructions on the common Makefile targets"
-	@echo "Available targets:"
-	@make -qp | awk -F':' '/^[a-zA-Z0-9][^$$#\/\t=]*:([^=]|$$)/ {split($$1,A,/ /);for(i in A)print A[i]}' | sort -u
-
-#########################################################
-# Local (emulator) commands
-#########################################################
+generate-apis:
+	$(MAKE) -C openapi
 
 run-local-backend:
-	$(MAKE) -C device-api run-local-backend
+	$(MAKE) -C device-api run-local
 
 run-local-frontend:
-	$(MAKE) -C web-ui run-local-frontend
-
-#########################################################
-# Image/site build commands
-#########################################################
-
-build: build-backend build-frontend-site
+	$(MAKE) -C web-ui run-local
 
 build-backend:
 	$(MAKE) -C device-api
 
-build-frontend-site:
+build-frontend:
 	$(MAKE) -C web-ui
-
-#########################################################
-# Deployment commands
-#########################################################
 
 run-deployment:
 	$(MAKE) -C deployment
 
-#########################################################
-# API regeneration commands
-#########################################################
-
-generate-apis:
-	$(MAKE) -C openapi
+clean:
+	$(MAKE) -C openapi clean
+	$(MAKE) -C web-ui clean
