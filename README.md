@@ -29,7 +29,7 @@ These components are packaged up as Docker containers, and are ready to be deplo
 
 * Build frontend site: `make build-frontend-site`
 
-* Start containers: `make run-deployment` -- site is available at http://localhost:80/
+* Start containers: `make run-deployment` -- site is available at http://localhost:80/ (run `ifconfig eth0` in WSL to find the localhost address)
 
 ## Notes
 
