@@ -2,7 +2,7 @@
 
 all: build
 
-DEPLOYMENT_DIR:=../deployment/web/static
+DEPLOYMENT_DIR:=../deployment/web-ui/static
 
 run-local:
 	npm install \
