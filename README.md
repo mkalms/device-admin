@@ -12,9 +12,10 @@ These components are packaged up as Docker containers, and are ready to be deplo
 # Development & building
 
 * Install Visual Studio Code
+* Install Docker and the Docker Compose plugin
 * Install Golang 1.18+
 * Install [nvm](https://github.com/nvm-sh/nvm)
-
+* Install the appropriate Node version by doing `nvm install $(cat web-ui/.nvmrc)`
 * Activate the appropriate Node version by doing `nvm use $(cat web-ui/.nvmrc)` in each terminal window
 
 ## Develop & test locally
@@ -27,9 +28,10 @@ These components are packaged up as Docker containers, and are ready to be deplo
 
 * Build backend container: `make build-backend`
 
-* Build frontend site: `make build-frontend-site`
+* Build frontend site: `make build-frontend`
 
-* Start containers: `make run-deployment` -- site is available at http://localhost:80/ (run `ifconfig eth0` in WSL to find the localhost address)
+* Start containers: `make run-deployment` -- site is available at http://localhost:80/ \
+  (run `ifconfig eth0` in WSL to find the localhost address)
 
 ## Notes
 
@@ -38,13 +40,26 @@ These components are packaged up as Docker containers, and are ready to be deplo
 * After modifying [the OpenAPI specification](openapi/openapi.yaml), regenerate glue code via `make generate-apis`
 * The current version uses 10MB RAM for the web container, and 5MB RAM for the backend API
 
-## First time installation with WSL2 and Ubuntu 22.04
+## First time installation on WSL2 and Ubuntu 22.04
 
 ```
-sudo apt-get update && sudo apt install make golang-go musl-tools docker.io
+# Install Docker, Golang, Make, and musl
+sudo apt-get update && sudo apt install docker.io golang-go make musl-tools
+
+# Install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Install the Docker Compose plugin
 mkdir -p ~/.docker/cli-plugins/
 curl -SL https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 chmod +x ~/.docker/cli-plugins/docker-compose
+
+# Add your user to the Docker group (log out and log in to re-evaluate group membership) 
 sudo usermod -aG docker ${USER}
+
+# Install the appropritate Node version (after cloning this repo)
+nvm install $(cat web-ui/.nvmrc)
+
+# Activate the appropriate Node version (after cloning this repo)
+nvm use $(cat web-ui/.nvmrc)
 ```
