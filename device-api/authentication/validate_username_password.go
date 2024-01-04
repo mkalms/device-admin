@@ -14,7 +14,7 @@ func CreateUsernamePasswordValidator() *UsernamePasswordValidator {
 
 func (*UsernamePasswordValidator) Validate(r *http.Request) (string, int, string) {
 
-	// Fetch username + password from Basic Authentication header of WWW request
+	// Fetch username + password from Basic Authentication header of HTTP request
 
 	username, password, basicAuthPresent := r.BasicAuth()
 
